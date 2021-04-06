@@ -1,41 +1,49 @@
-
-// importando componentes
+// importando funções
 import BotaoConclui from './componentes/concluiTarefa.js'
 import BotaoDeleta from './componentes/deletaTarefa.js'
 
-    // tarefa principal 
-    const criarTarefa = (evento) => {
-
-
-    //
+// item 
+const novoItem = (evento) => {
     evento.preventDefault()
 
-    // selecionando objeto no dom
     const lista = document.querySelector('[data-list]')
     const input = document.querySelector('[data-form-input]')
-    // recebendo valor do input
     const valor = input.value
 
+    const calendario = document.querySelector('[data-form-date]')
+    const data = moment(calendario.value)
 
-    // criando objeto na lista
+    const dataFormatada = data.format('DD/MM/YYYY')
+
+    const dados = { 
+        valor,
+        dataFormatada
+    }
+
+    const criaTarefa = criarTarefa(dados)
+
+    lista.appendChild(criaTarefa)
+
+    sessionStorage.setItem('tarefas',  dados )
+    input.value = " "
+}
+
+
+const criarTarefa = ({ valor, dataFormatada }) => {
+
     const tarefa = document.createElement('li')
-    // adicionando class ao objeto
     tarefa.classList.add('task')
-    // substituindo conteudo
-    const conteudo = `<p class="content">${valor}</p>`
+    const conteudo = `<p class="content">${dataFormatada} * ${valor}</p>`
 
-    // 
     tarefa.innerHTML = conteudo
 
-
-    // adiciona um nó
     tarefa.appendChild(BotaoConclui())
     tarefa.appendChild(BotaoDeleta())
-    lista.appendChild(tarefa)
-    input.value = " "
+   
+    return tarefa
 
 }
 
 const novaTarefa = document.querySelector('[data-form-button]')
 
-novaTarefa.addEventListener('click', criarTarefa)
+novaTarefa.addEventListener('click', novoItem)
