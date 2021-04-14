@@ -11,7 +11,7 @@ body {
   }
   
   .todo-list {
-    background-color: #0B2027;
+    background-image: url(../image/background.jpg);
     font-family: "Space Mono", monospace;
     padding: 1rem;
     min-width: 400px;
@@ -23,6 +23,7 @@ body {
     font-size: 1.5rem;
     font-family: "BioRhyme", serif;
     color: #F6F1D1;
+    text-align: center;
   }
   
   .form {
