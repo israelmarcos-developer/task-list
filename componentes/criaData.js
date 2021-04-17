@@ -1,6 +1,5 @@
-// função criando data
 import {Tarefa} from './criaTarefa.js'
-
+// função criando data
 export const criaData = (data) => {
 
     const tarefas = JSON.parse(localStorage.getItem('tarefas'))||[]
